@@ -13,8 +13,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Bats
+  - Player
   - 
   - 
   - 
@@ -42,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Backgroud
+    uniqueID: 162906617
+    locked: 0
+  - name: Center
+    uniqueID: 1886408209
+    locked: 0
+  - name: Front
+    uniqueID: 76916841
     locked: 0
