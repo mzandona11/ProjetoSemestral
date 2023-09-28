@@ -28,7 +28,7 @@ public class BearTrapController : MonoBehaviour
 
             
             skin.GetComponent<Animator>().Play("Trap", -1);
-            collision.GetComponent<Character>().life--;
+            collision.GetComponent<Character>().PlayerDamage(1);
 
             collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 

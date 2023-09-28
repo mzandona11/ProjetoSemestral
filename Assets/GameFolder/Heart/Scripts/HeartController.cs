@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KepperAttackCollider : MonoBehaviour
+public class HeartController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class KepperAttackCollider : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Character>().PlayerDamage(1);
+            collision.GetComponent<Character>().life++;
         }
     }
 }

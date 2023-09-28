@@ -41,7 +41,7 @@ public class BatController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && contAttack >= 1)
         {
-            collision.gameObject.GetComponent<Character>().life--;
+            collision.gameObject.GetComponent<Character>().PlayerDamage(1);
             contAttack = 0;
         }
     }

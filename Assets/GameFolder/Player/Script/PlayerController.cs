@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Windows;
 using Input = UnityEngine.Input;
 
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigid;
 
     public Transform skin;
+
+    public Text playerLife_UI;
 
     
     // Start is called before the first frame update
@@ -52,6 +55,8 @@ public class PlayerController : MonoBehaviour
         {
             dash();
         }
+
+        playerLife_UI.text = "x" + GetComponent<Character>().life.ToString();
     }
 
     void move(){
