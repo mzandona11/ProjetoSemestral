@@ -21,6 +21,7 @@ public class HeartController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.GetComponent<Character>().life++;
+            Destroy(transform.gameObject);
         }
     }
 }
