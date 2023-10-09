@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 using Input = UnityEngine.Input;
@@ -21,16 +22,41 @@ public class PlayerController : MonoBehaviour
 
     public Text playerLife_UI;
 
-    
+    public string currentLevel;
+
+    public AudioSource audioSource;
+
+    public AudioClip dashAudio;
+
+    public AudioClip attack1Audio;
+
+    public AudioClip attack2Audio;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+
         rigid = GetComponent<Rigidbody2D>();
-    }
+
+        currentLevel = SceneManager.GetActiveScene().name;
+
+        DontDestroyOnLoad(transform.gameObject);
+
+        audioSource = GetComponent<AudioSource>();
+
+     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!currentLevel.Equals(SceneManager.GetActiveScene().name) )
+        {
+            currentLevel = SceneManager.GetActiveScene().name;
+            transform.position = GameObject.Find("Spawn").transform.position;
+        }
+
         if (GetComponent<Character>().life <= 0)
         {
             this.enabled = false;
@@ -91,6 +117,8 @@ public class PlayerController : MonoBehaviour
 
     void dash(){
 
+        audioSource.PlayOneShot(dashAudio,1);
+
         skin.GetComponent<Animator>().Play("Dash",-1);
         rigid.AddForce(new Vector2(6 * Input.GetAxisRaw("Horizontal") , 0), ForceMode2D.Impulse);
         
@@ -100,10 +128,12 @@ public class PlayerController : MonoBehaviour
 
         if (numCombo == 1 && contCombo <= 1)
         {
+            audioSource.PlayOneShot(attack2Audio, 1);
             skin.GetComponent<Animator>().Play("Attack2",-1);
             numCombo = 0;    
         }else
         {
+            audioSource.PlayOneShot(attack1Audio, 1);
             skin.GetComponent<Animator>().Play("Attack1",-1);
             contCombo = 0;
             numCombo = 1;    
