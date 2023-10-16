@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
 
     public Transform skin;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +30,7 @@ public class Character : MonoBehaviour
     {
         life = life - value;
         skin.GetComponent<Animator>().Play("PlayerDamage1", 1);
+        skin.parent.GetComponent<PlayerController>().audioSource.PlayOneShot(skin.parent.GetComponent<PlayerController>().damageAudio,1);
+
     }
 }

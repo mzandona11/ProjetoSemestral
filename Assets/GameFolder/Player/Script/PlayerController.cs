@@ -32,6 +32,13 @@ public class PlayerController : MonoBehaviour
 
     public AudioClip attack2Audio;
 
+    public AudioClip groundedAudio;
+
+    public AudioClip upAudio;
+
+    public AudioClip gameOverAudio;
+
+    public AudioClip damageAudio;
 
 
     // Start is called before the first frame update
@@ -59,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
         if (GetComponent<Character>().life <= 0)
         {
+            audioSource.PlayOneShot(gameOverAudio, 1);
             this.enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = false;
         }
@@ -110,6 +118,7 @@ public class PlayerController : MonoBehaviour
 
     void jump(){
 
+        audioSource.PlayOneShot(upAudio, 1);
         skin.GetComponent<Animator>().Play("Jump",-1);
         rigid.AddForce(new Vector2(0, impulse), ForceMode2D.Impulse);
 
@@ -146,6 +155,8 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Floor"))
         {
+
+            
             isJump= true;
         }
     }
@@ -154,6 +165,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Floor"))
         {
             isJump = false;
+            audioSource.PlayOneShot(groundedAudio, 1);            
         }
     }
 }
