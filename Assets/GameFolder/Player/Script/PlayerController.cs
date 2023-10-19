@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
 
     public AudioClip damageAudio;
 
+    public Transform pauseScreen;
+
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +72,12 @@ public class PlayerController : MonoBehaviour
             this.enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = false;
         }
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            pauseScreen.GetComponent<Pause>().enabled = !pauseScreen.GetComponent<Pause>().enabled;
+        }
+
 
         contCombo += Time.deltaTime;
 
@@ -167,5 +175,9 @@ public class PlayerController : MonoBehaviour
             isJump = false;
             audioSource.PlayOneShot(groundedAudio, 1);            
         }
+    }
+
+    public void destroyPlayer() {
+        Destroy(transform.gameObject);
     }
 }
