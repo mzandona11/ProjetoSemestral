@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform pauseScreen;
 
+    public Transform gameOverScreen;
+
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +70,9 @@ public class PlayerController : MonoBehaviour
 
         if (GetComponent<Character>().life <= 0)
         {
+            gameOverScreen.GetComponent<CanvasGroup>().alpha = 1;
+            gameOverScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
             audioSource.PlayOneShot(gameOverAudio, 1);
             this.enabled = false;
             GetComponent<CapsuleCollider2D>().enabled = false;

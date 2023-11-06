@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class HeartController : MonoBehaviour
 {
+
+    public AudioClip upLifeAudio;
+
+    public AudioSource v_AudioSource;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +27,15 @@ public class HeartController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            v_AudioSource.PlayOneShot(upLifeAudio,1);
             collision.GetComponent<Character>().life++;
-            Destroy(transform.gameObject);
+            Invoke("dastroyHeart",0.5f);
         }
     }
+
+    private void dastroyHeart() {
+        Destroy(transform.gameObject);
+    }
+
+
 }

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FireTrapController : MonoBehaviour
 {
+    public AudioClip fireAudio;
+
+    public AudioSource v_audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,12 @@ public class FireTrapController : MonoBehaviour
         {
             collision.GetComponent<Character>().PlayerDamage(1);
         }
+    }
+
+    public void firePlay()
+    {
+        v_audioSource.PlayOneShot(fireAudio, 1);
+            
     }
 
 }
