@@ -24,6 +24,9 @@ public class SpikeController : MonoBehaviour
         {
             boss = collision.transform;
             collision.transform.parent = transform;
+
+            collision.gameObject.SetActive(false);
+            
             
         }
     }
@@ -31,7 +34,8 @@ public class SpikeController : MonoBehaviour
     public void realeseBoss()
     {
 
-        boss.parent = null; 
+        boss.parent = null;
+        boss.gameObject.SetActive(true);
 
     }
 }
