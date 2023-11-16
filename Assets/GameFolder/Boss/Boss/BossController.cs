@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows.WebCam;
 
 public class BossController : MonoBehaviour
 {
@@ -13,16 +14,37 @@ public class BossController : MonoBehaviour
 
     public float contLaizer;
 
+    public AudioSource audioSource;
+
+    public AudioClip audioBoss;
+
+    public AudioClip playerWin;
+
+    public Transform victoryScreen;
+
     // Start is called before the first frame update
     void Start()
     {
         proximoPonto = pontoA.position;
+
+        audioBossM();
     }
 
     // Update is called once per frame
     void Update()
     {
         contLaizer += Time.deltaTime;
+
+        if (GetComponent<Character>().life <= 0)
+        {
+            this.enabled = false;
+            GetComponent<Rigidbody2D>().gravityScale = 1;
+
+            audioSource.PlayOneShot(playerWin);
+            victoryScreen.GetComponent<CanvasGroup>().alpha = 1;
+            victoryScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        }
 
         if (contLaizer >= 5)
         {
@@ -49,7 +71,17 @@ public class BossController : MonoBehaviour
         }
 
         transform.position = Vector2.MoveTowards(transform.position, proximoPonto, 5 * Time.deltaTime);
-
-
+        
     }
+
+    public void audioBossM()
+    {
+        if (GetComponent<Character>().life > 0)
+        {
+            Invoke("audioBossM", 6);
+            audioSource.PlayOneShot(audioBoss);
+        }        
+    }
+
+
 }

@@ -19,10 +19,16 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (life<=0)
+        if (life<=0 && !transform.name.Equals("BossBrain"))
         {
             skin.GetComponent<Animator>().Play("Die",-1);
         }
+
+        if (transform.name.Equals("BossBrain") )
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().size = new Vector2(1.78f, (life * 1.09f / 30));
+        }
+
 
     }
 
